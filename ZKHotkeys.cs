@@ -69,6 +69,13 @@ public class ZKHotkeys : Editor {
 	static void zk_edit_physics() {
 		EditorApplication.ExecuteMenuItem("Edit/Project Settings/Physics");
 	}
+
+	[MenuItem ("ZKTools/Activate\\Deactivate selected objects %#d")]
+    static void ChangeActivate() {
+      foreach (GameObject go in Selection.gameObjects) {
+        go.SetActive(!go.activeInHierarchy);
+      }
+    }
 	[MenuItem("ZKTools/Show Editor APM _?")]
 	static void zk_show_APM_view() {		
 		showAPM = !showAPM;
