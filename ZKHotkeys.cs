@@ -76,7 +76,7 @@ public class ZKHotkeys : Editor {
 		}
 	}
 
-	[MenuItem ("ZKTools/Activate\\Apply changes to all selected prefabs %&a")]
+	[MenuItem ("ZKTools/Apply changes to all selected prefabs %&a")]
 	static void MassPrefabApply() {
 		foreach (GameObject go in Selection.gameObjects) {
 			PrefabUtility.ReplacePrefab(go, PrefabUtility.GetPrefabParent(go),
