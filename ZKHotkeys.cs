@@ -84,7 +84,38 @@ public class ZKHotkeys : Editor {
 		}
 		Debug.Log("Applied to " + Selection.gameObjects.Length + " game object prefabs");
 	}
-
+	
+	[MenuItem("ZKTools/Flip Normals %#i")]
+	static void NormalReversedMesh () {
+		Mesh filter = Selection.activeObject as Mesh;
+		string path = AssetDatabase.GetAssetPath(filter);
+		path = path.Substring(0, path.Length - (filter.name + ".asset").Length); 
+		Debug.Log(path);
+		if (filter != null) {
+			Mesh mesh = PrimitivesPro.MeshUtils.CopyMesh(filter);
+			
+			Vector3[] normals = mesh.normals;
+			for (int i=0;i<normals.Length;i++)
+				normals[i] = -normals[i];
+			mesh.normals = normals;
+			
+			for (int m=0;m<mesh.subMeshCount;m++) {
+				int[] triangles = mesh.GetTriangles(m);
+				for (int i=0;i<triangles.Length;i+=3) {
+					int temp = triangles[i + 0];
+					triangles[i + 0] = triangles[i + 1];
+					triangles[i + 1] = temp;
+				}
+				mesh.SetTriangles(triangles, m);
+			}
+			Debug.Log ("Created inverted Mesh filter");
+			// TODO: The path should be based on the original asset's path.
+			AssetDatabase.CreateAsset(mesh, path + filter.name + "_inverted.asset");
+		} else {
+			Debug.Log ("Invalid selection for inversion");
+		}
+	}
+	
 
 	[MenuItem("ZKTools/Show Editor APM _?")]
 	static void zk_show_APM_view() {		
