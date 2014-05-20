@@ -32,7 +32,13 @@ public class ZKHotkeys : Editor {
 	 	EditorWindow.GetWindow(typeof(ZKHotkeys));
 	 }
 
-	 [MenuItem("ZKTools/Clear Console &x")]
+	[MenuItem ("ZKTools/Sync Code %r")]
+	static void ReSyncProject() {
+		zk_clear_console ();
+		EditorApplication.ExecuteMenuItem("Assets/Refresh");
+	}
+
+	[MenuItem("ZKTools/Clear Console &x")]
 	 static void zk_clear_console() {
 	 	Debug.Log("Executing Console Clear [You shouldn't see this message]");
 		Assembly assembly = Assembly.GetAssembly(typeof(SceneView)); 
