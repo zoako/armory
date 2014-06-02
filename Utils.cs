@@ -44,7 +44,6 @@ public class Utils {
 		return lbd + mod(val-lbd, ubd+1-lbd);
 	}
 	
-	/*
 	public static float wrap(float val, float lbd = 0f, float ubd = 1f) {
 		float wrapval = val/(ubd-lbd);
 		return lbd + val - Mathf.Floor(wrapval)*(ubd-lbd);
@@ -53,7 +52,6 @@ public class Utils {
 	public static float clamp(float val, float lbd = 0f, float ubd = 1f) {
 		return Mathf.Max (lbd, Mathf.Min(val, ubd));
 	}
-	*/
 
 	public static float Sum(float [] numbers) {
 		float sum = 0;
@@ -115,14 +113,13 @@ public class Utils {
 	}
 	
 	// Not really very useful?
-	private static bool NamespaceExists(string namespaceChecked) {
+	public static bool NamespaceExists(string namespaceChecked) {
 		var namespaceFound = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
 		                      from type in assembly.GetTypes()
 		                      where type.Namespace == namespaceChecked
 		                      select type).Any();
 		
 		return (bool) namespaceFound;
-	}
-	
+	}	
 }
 }

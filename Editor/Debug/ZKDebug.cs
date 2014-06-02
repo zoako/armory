@@ -5,8 +5,9 @@ using ZKTools;
 
 public class ZKDebug : EditorWindow {
 
-	// Set a higher debug level to catch more debug statements
-	private static int debugLevel = 10;
+	private static ZKDebug window = null;
+	static bool visible = false;
+
 	// Public Usage Calls
 	[MenuItem("ZKTools/ZKDebug Console #%w")]
 	static void CreateOrReattach () {
@@ -18,12 +19,14 @@ public class ZKDebug : EditorWindow {
 
 		Debug.Log("Reattached at " + System.DateTime.Now.TimeOfDay) ;
 
+		SetLogLayout(GUILayout.MinHeight(logHeight));
 		window.attemptedScroll = false;
 		window.scrolledDown = false;
 		window.newLogArrived = false;
 		window.eventsWaited = 0;
+
 	}
-	
+
 	public static void Clear() {
 		if (window != null) {
 			window.logs.Clear();
@@ -31,18 +34,23 @@ public class ZKDebug : EditorWindow {
 		}
 	}
 
+	// Set a higher debug level to catch more debug statements
+	private static int debugLevel = 10;
 	public static void setDebugLevel(int level) {
 		debugLevel = Mathf.Max (0, level);
 	}
-
-
+	
+	public static void SetLogLayout(params GUILayoutOption[] options) {
+		Log.SetLayout(options);
+	}
+	
 	class Log {
 		public string message;
 		public string stackTrace;
 		public LogType type;
-		private GUILayoutOption[] layoutParams;
+		private static GUILayoutOption[] layoutParams;
 
-		public void SetLayout(params GUILayoutOption[] options) {
+		public static void SetLayout(params GUILayoutOption[] options) {
 			layoutParams = options;
 		}
 
@@ -52,7 +60,6 @@ public class ZKDebug : EditorWindow {
 		}
 	}
 
-	static bool visible = false;
 	static bool consoleDevMode = true;
 	static float devLabelHeight = 30;
 
@@ -65,10 +72,6 @@ public class ZKDebug : EditorWindow {
 		{ LogType.Log, Color.white },
 		{ LogType.Warning, Color.yellow },
 	};
-
-	private bool IsNearBottom() {
-		return (scrollPosition.y > (scrollBottom - 2f*(logHeight + 10f)));
-	}
 
 	// Layout properties and settings
 	protected static float logHeight = 30;
@@ -88,6 +91,10 @@ public class ZKDebug : EditorWindow {
 	bool newLogArrived = false;
 	int eventsWaited;
 
+	private bool IsNearBottom() {
+		return (scrollPosition.y > (scrollBottom - 2f*(logHeight + 10f)));
+	}
+	
 	Vector2 BeginAutoScrollView (params GUILayoutOption[] options) {
 		// Figuring out scroll-mode
 		scrollBottom = logs.Count * (logHeight + 2f) - position.height + devLabelHeight + 10f;
@@ -154,7 +161,6 @@ public class ZKDebug : EditorWindow {
 					EditorApplication.isPlaying?3:0;
 	}
 
-	private static ZKDebug window = null;
 	void OnDestroy() {
 		window = null;
 		visible = false;
