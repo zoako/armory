@@ -8,7 +8,7 @@ using System.Collections;
 using ZKTools;
 
 public class Hotkeys : Editor {
-	[MenuItem ("ZKTools/Sync Code %r")]
+	[MenuItem ("ZKTools/Sync Code %#r")]
 	static void ReSyncProject() {
 		zk_clear_console ();
 		EditorApplication.ExecuteMenuItem("Assets/Refresh");
