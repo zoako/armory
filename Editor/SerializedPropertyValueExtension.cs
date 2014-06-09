@@ -2,6 +2,7 @@
 /// 	e.g. `Debug.Log(mySerializedProperty.Value<Color>());`
 /// @usage: Lives best within `Assets/Plugins/`.
 
+#if UNITY_EDITOR
 using System;
 using System.Reflection;
 using System.Collections.Generic; // for: KeyValuePair<,>
@@ -125,3 +126,4 @@ public static class SerializedPropertyValueExtension
 		return gradientValue;
 	}
 }
+#endif
