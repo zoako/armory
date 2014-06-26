@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using ZKTools;
@@ -192,3 +193,5 @@ public class ZKDebug : EditorWindow {
 
 
 }
+}
+#endif

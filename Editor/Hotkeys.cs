@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using System;
@@ -124,3 +125,4 @@ public class Hotkeys : Editor {
 	}
 	*/
 }
+#endif
