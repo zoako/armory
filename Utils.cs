@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Collections;
 namespace ZKTools {
-public class Utils {
+public static class Utils {
 	// String stuff
 	public static string Timerify (float timer) {
 		int displayMinutes = (int)(timer/60);
@@ -112,6 +112,20 @@ public class Utils {
 		return newmesh;
 	}
 	
+	// Good for editor background colors
+	public static Texture2D MakeTex(int width, int height, Color col){
+        Color[] pix = new Color[width*height];
+ 
+        for(int i = 0; i < pix.Length; i++)
+            pix[i] = col;
+ 
+        Texture2D result = new Texture2D(width, height);
+        result.SetPixels(pix);
+        result.Apply();
+ 
+        return result;
+    }
+
 	// Not really very useful?
 	public static bool NamespaceExists(string namespaceChecked) {
 		var namespaceFound = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
