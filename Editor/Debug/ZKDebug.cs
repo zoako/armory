@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using ZKTools;
 
+namespace ZKTools {
 public class ZKDebug : EditorWindow {
 	private static ZKDebug window = null;
 	static bool visible = false;
