@@ -155,6 +155,10 @@ public static class Utils {
 		public override string ToString() {
 			return "(" + vertices[0] + ", " + vertices[1] + ")";
 		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
 	}
 
 	private static List<Edge> UniqueEdges(int[] triangles) {
@@ -185,7 +189,7 @@ public static class Utils {
     /// <param name="target">Transform</param>
     /// <param name="isStatic">boolean</param>
 	public static Dictionary<Vector3, Vector3> EdgeVertices(Transform target, bool isStatic = false) {
-		Mesh m = target.GetComponent<MeshCollider>().mesh;
+		Mesh m = target.GetComponent<MeshCollider>().sharedMesh;
 		// TODO: Verify that the mesh is open. Right now assume open
 
 		// Clean out internal vertices: only singlefaced edges are at mesh edge

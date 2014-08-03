@@ -11,6 +11,72 @@ using UnityEditor;
 
 public static class SerializedPropertyValueExtension
 {
+	public static void SetValue(this SerializedProperty thisSP, object val) {
+
+		switch (thisSP.propertyType) {
+		case SerializedPropertyType.Integer:
+			thisSP.intValue = (int)val;
+			break;
+		case SerializedPropertyType.Boolean:
+			thisSP.boolValue = (bool)val;
+			break;
+		case SerializedPropertyType.Float:
+			thisSP.floatValue = (float)val;
+			break;
+		case SerializedPropertyType.String:
+			thisSP.stringValue = (string)val;
+			break;
+		case SerializedPropertyType.Color:
+			thisSP.colorValue = (Color)val;
+			break;
+		case SerializedPropertyType.ObjectReference:
+			thisSP.objectReferenceValue = (GameObject)val;
+			break;
+		case SerializedPropertyType.LayerMask:
+			thisSP.intValue = (int)val;
+			break;
+		case SerializedPropertyType.Enum:
+			// TODO: Verify if this works
+			Debug.LogWarning("Untested with Enum setting");
+			thisSP.enumValueIndex = (int)val;
+			break;
+		case SerializedPropertyType.Vector2:
+			thisSP.vector2Value = (Vector2)val;
+			break;
+		case SerializedPropertyType.Vector3:
+			thisSP.vector3Value = (Vector3)val;
+			break;
+		case SerializedPropertyType.Rect:
+			thisSP.rectValue = (Rect)val;
+			break;
+		/*
+		case SerializedPropertyType.ArraySize:
+			thisSP.intValue = (T)val;
+			break;
+		case SerializedPropertyType.Character:
+			thisSP.intValue = (T)val;
+			break;
+		case SerializedPropertyType.AnimationCurve:
+			thisSP.animationCurveValue = (T)val;
+			break;
+		case SerializedPropertyType.Bounds:
+			thisSP.boundsValue = (T)val;
+			break;
+		case SerializedPropertyType.Gradient:
+			// TODO: Verify if this works
+			Debug.LogWarning("Untested with gradients setting");
+			//thisSP = SafeGradientValue(val);
+			break;
+		case SerializedPropertyType.Quaternion:
+			thisSP.quaternionValue = (T)val;
+			break;
+		*/
+		default:
+			// And if all fails, throw an exception.
+			throw new NotImplementedException("Unimplemented propertyType "+thisSP.propertyType+".");
+		}
+	}
+
 	/// @note: switch/case derived from the decompilation of SerializedProperty's internal SetToValueOfTarget() method.
 	public static ValueT Value<ValueT>(this SerializedProperty thisSP)
 	{
@@ -103,7 +169,8 @@ public static class SerializedPropertyValueExtension
 			return thisSP.quaternionValue;
 			
 		default:
-			throw new NotImplementedException("Unimplemented propertyType "+thisSP.propertyType+".");
+			throw new NotImplementedException("Unimplemented property " + thisSP.propertyPath + 
+												" of Type " + thisSP.propertyType+".");
 		}
 	}
 	

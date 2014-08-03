@@ -22,7 +22,7 @@ public class Log {
 	public List<string> messageLines = new List<string>();
 	public List<string> stackLines = new List<string>();
 	public int calculateLines(float width) {
-		int lineChars = (int)(width/10);
+		//int lineChars = (int)(width/10);
 		foreach (string s in message.Split ('\n')) {
 			messageLines.Add(s);
 		}

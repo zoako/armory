@@ -7,7 +7,6 @@ using ZKTools;
 namespace ZKTools {
 public class ZKDebug : EditorWindow {
 	private static ZKDebug window = null;
-	static bool visible = false;
 
 	// Set some style stuff
 	protected static int logHeight = 35;
@@ -64,6 +63,7 @@ public class ZKDebug : EditorWindow {
 
 	static bool consoleDevMode = true;
 
+	/*
 	// Visual elements:
 	static readonly Dictionary<LogType, Color> logTypeColors = new Dictionary<LogType, Color> {
 		{ LogType.Assert, Color.white },
@@ -72,7 +72,8 @@ public class ZKDebug : EditorWindow {
 		{ LogType.Log, Color.white },
 		{ LogType.Warning, Color.yellow },
 	};
-
+	*/
+	
 	// Properties we care about
 	readonly List<Log> logs = new List<Log>();
 	bool collapse;
@@ -126,7 +127,7 @@ public class ZKDebug : EditorWindow {
 
 	protected void GUIDevSection(float top) {
 		GUI.Box(new Rect(0, top, position.width, 2f), "", boxStyle);
-		//GUILayout.Box("", boxStyle, boxLayout);
+		GUILayout.Box("", boxStyle, boxLayout);
 		if (consoleDevMode) {
 			GUI.Label (new Rect(0, top, position.width, h_dev),
 				"ZKDebug; selected: " + selectedLog + "; position: " + scroll_list + "; height: " + position.height,
@@ -140,7 +141,6 @@ public class ZKDebug : EditorWindow {
 	[MenuItem("ZKTools/ZKDebug Console #%w")]
 	static void CreateOrReattach () {
 		if (window == null) window = (ZKDebug) EditorWindow.GetWindow(typeof(ZKDebug));
-		visible = true;
 
 		Application.RegisterLogCallback(window.HandleLog);
 		// Some intiialization stuff
@@ -182,16 +182,16 @@ public class ZKDebug : EditorWindow {
 
 	void OnDestroy() {
 		window = null;
-		visible = false;
 		Application.RegisterLogCallback(null);
 	}
 	
 	// Set a higher debug level to catch more debug statements
+	/*
 	private static int debugLevel = 10;
 	public static void setDebugLevel(int level) {
 		debugLevel = Mathf.Max (0, level);
 	}
-
+	*/
 
 }
 }
