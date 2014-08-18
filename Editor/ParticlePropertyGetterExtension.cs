@@ -11,9 +11,8 @@ public static class ParticlePropertyGetter {
 													params string [] propParts) {
 		SerializedProperty prop = so.GetIterator();
 		string propName = String.Join(".", propParts);
-		Debug.Log(propName);
 		while (prop.Next(true) && prop.propertyPath != propName) {
-			Debug.Log(prop.propertyPath + ": " + prop.propertyType);
+			//Debug.Log(prop.propertyPath + ": " + prop.propertyType);
 		}
 		return prop;
 	}

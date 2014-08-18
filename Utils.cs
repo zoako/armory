@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+
 namespace ZKTools {
 public static class Utils {
 	// String stuff
@@ -18,18 +19,21 @@ public static class Utils {
 		return new Rect(0.01f*left*Screen.width, 0.01f*top*Screen.height, 0.01f*width*Screen.width, 0.01f*height*Screen.height);
 	}
 	
-	public static Vector3 SetX(Vector3 input, float x) {
-		return new Vector3(x, input.y, input.z);
+	public static Vector3 SetX(this Vector3 input, float x) {
+		input = new Vector3(x, input.y, input.z);
+		return input;
 	}
-	public static Vector3 SetY(Vector3 input, float y) {
-		return new Vector3(input.x, y, input.z);
-	}
-
-	public static Vector3 SetZ( Vector3 input, float z) {
-		return new Vector3(input.x, input.y, z);
+	public static Vector3 SetY(this Vector3 input, float y) {
+		input = new Vector3(input.x, y, input.z);
+		return input;
 	}
 
-	public static bool SetActive(GameObject obj, bool active) {
+	public static Vector3 SetZ(this Vector3 input, float z) {
+		input = new Vector3(input.x, input.y, z);
+		return input;
+	}
+
+	public static bool SetGOActive(this GameObject obj, bool active) {
 		if (obj.activeInHierarchy == active) return false;
 		obj.SetActive(active);
 		return true;
@@ -269,48 +273,7 @@ public static class Utils {
 		
 		return (bool) namespaceFound;
 	}	
-/*
-	public static List<Vector3> EdgeVertices(Transform target, bool isStatic = false) {
-		Mesh m = target.GetComponent<MeshCollider>().mesh;
-		// TODO: Verify that the mesh is open. Right now assume open
-		List<Vector3> temp = new List<Vector3>();
 
-		// TODO: It would be more efficient to sort the edges in order 
-		//  first and then take unique vertices from that ordered list
-
-		// Clean out internal vertices: only singlefaced edges are at mesh edge
-		foreach (Edge e in UniqueEdges(m.triangles)) {
-			if (e.SingleFaced()) {
-				foreach (int v in e.vertices) {
-					if (!temp.Contains(m.vertices[v])) {
-						Vector3 vToAdd = isStatic?
-										(target.position + target.rotation*m.vertices[v]):
-										m.vertices[v];
-						temp.Add(vToAdd);
-					}
-				}
-			}
-		}
-
-		List<Vector3> result = new List<Vector3>();
-		result.Add(temp[0]);
-		temp.RemoveAt(0);
-		// This bit is a bit expensive -- Can we optimize somehow?
-		while (temp.Count > 0) {
-			temp = temp.OrderBy(v => Vector3.Distance(v, result[result.Count-1])).ToList();
-			result.Add(temp[0]);
-			temp.RemoveAt(0);
-		}
-		
-		// Outline over the edges
-		for (int i = 0; i < result.Count-1; i++) {
-			Debug.DrawLine(result[i], result [i+1], Color.red, 30f);
-		}
-
-		// Sort the vertices by adjacency
-		return result;
-	}
-*/
 }
 
 static class Extensions
