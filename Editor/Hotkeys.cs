@@ -71,6 +71,16 @@ public class Hotkeys : Editor {
 		Debug.Log("Applied to " + Selection.gameObjects.Length + " game object prefabs");
 	}
 
+	[MenuItem("ZKTools/Focus Camera %t")]
+	static void FocusCamera() {
+    	GameObject target = Selection.activeObject as GameObject;
+        Vector3 position = SceneView.lastActiveSceneView.pivot;
+        position.z -= 10.0f;
+        SceneView.lastActiveSceneView.pivot = position;
+        SceneView.lastActiveSceneView.rotation = target.transform.rotation;
+        SceneView.lastActiveSceneView.Repaint();
+	}
+
 	[MenuItem("ZKTools/Flip Normals %#i")]
 	static void NormalReversedMesh () {
 		Mesh filter = Selection.activeObject as Mesh;
@@ -98,31 +108,5 @@ public class Hotkeys : Editor {
 			Debug.Log ("Failed. Invalid selection for inversion");
 		}
 	}
-
-	/*
-	// Experimental, trying to get APM while in editor. Work faster!
-	static bool showAPM = false;
-	static int totalActions = 0;
-
-	 void OnGUI() {
-	 	if (showAPM) Debug.Log("Showing APM View");
-	 	GUILayout.Label("Total actions performed this session", EditorStyles.boldLabel);
-	 	EditorGUILayout.TextField("0", String.Format("{0000}", totalActions));
-
-	 }
-
-	 void Update() {
-	 	Debug.Log("New action!");
-	 	if (Event.current.type == EventType.MouseUp) {
-	 		Debug.Log("New action!");
-	 		totalActions++;
-	 	}
-	 }
-	[MenuItem("ZKTools/Show Editor APM _?")]
-	static void zk_show_APM_view() {		
-		showAPM = !showAPM;
-		Debug.Log((showAPM?"Opened":"Closed") +" the APM Window");
-	}
-	*/
 }
 #endif
