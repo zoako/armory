@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
 using UnityEditor;
+#endif
+using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using ZKTools;
 
 public class Log {
+#if UNITY_EDITOR
 	public string message;
 	public string stackTrace;
 	public LogType type;
@@ -36,7 +39,5 @@ public class Log {
 	public List<string> getAllLines() {
 		return (List<string>)(messageLines.Concat(stackLines).ToList());
 	}
-
-
+#endif
 }
-
