@@ -53,10 +53,6 @@ public static class Utils {
 		return lbd + val - Mathf.Floor(wrapval)*(ubd-lbd);
 	}
 	
-	public static float clamp(float val, float lbd = 0f, float ubd = 1f) {
-		return Mathf.Max (lbd, Mathf.Min(val, ubd));
-	}
-
 	public static float Sum(float [] numbers) {
 		float sum = 0;
 		foreach (float f in numbers) sum += f;
