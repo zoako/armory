@@ -44,6 +44,7 @@ public static class Utils {
 		return a - Mathf.FloorToInt((float)a/b)*b;
 	}
 	
+	// this should cycle val into a number between lbd (inclusive) and ubd (exclusive)
 	public static int wrap(int val, int lbd, int ubd) {
 		return lbd + mod(val-lbd, ubd+1-lbd);
 	}
