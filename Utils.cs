@@ -1,6 +1,7 @@
 ﻿//using UnityEditor;
 using UnityEngine;
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -14,6 +15,8 @@ namespace ZKTools {
 			return text;
 		}
 		
+		// IO stuff
+
 		// Shorthand for unity stuff
 		public static Rect RelRect(float left, float top, float width, float height) {
 			return new Rect(0.01f*left*Screen.width, 0.01f*top*Screen.height, 0.01f*width*Screen.width, 0.01f*height*Screen.height);
