@@ -27,28 +27,6 @@ public class Hotkeys : Editor {
 		method.Invoke(new object(), null);
 	}
 
-	[MenuItem("ZKTools/Create C# script &#3")]
-	static void zk_create_cscript() {
-		EditorApplication.ExecuteMenuItem("Assets/Create/C# Script");
-	}
-
-	[MenuItem("ZKTools/Create Cube &a")]
-	static void zk_create_cube() {
-		Debug.Log("Creating cube");
-		EditorApplication.ExecuteMenuItem("GameObject/Create Other/Cube");
-	}
-
-	[MenuItem("ZKTools/Create Quad &s")]
-	static void zk_create_sphere() {
-		Debug.Log("Creating quad");
-		EditorApplication.ExecuteMenuItem("GameObject/Create Other/Quad");
-	}
-
-	[MenuItem("ZKTools/Create Point Light &d")]
-	static void zk_create_d_light() {
-		Debug.Log("Creating Point light");
-		EditorApplication.ExecuteMenuItem("GameObject/Create Other/Point Light");
-	}
 
 	[MenuItem("ZKTools/Edit Physics &p")]
 	static void zk_edit_physics() {
@@ -74,10 +52,10 @@ public class Hotkeys : Editor {
 	[MenuItem("ZKTools/Focus Camera %t")]
 	static void FocusCamera() {
     	GameObject target = Selection.activeObject as GameObject;
-        Vector3 position = SceneView.lastActiveSceneView.pivot;
-        position.z -= 10.0f;
+        Quaternion rotation = SceneView.lastActiveSceneView.rotation;
+        Vector3 position = target.transform.position;
         SceneView.lastActiveSceneView.pivot = position;
-        SceneView.lastActiveSceneView.rotation = target.transform.rotation;
+        SceneView.lastActiveSceneView.rotation = rotation;
         SceneView.lastActiveSceneView.Repaint();
 	}
 
