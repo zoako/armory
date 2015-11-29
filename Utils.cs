@@ -35,7 +35,11 @@ namespace ZKTools {
 			input = new Vector3(input.x, input.y, z);
 			return input;
 		}
-		
+
+		public static float SqDistance(this Vector3 input, Vector3 b) {
+			return (b-input).sqrMagnitude;
+		}
+
 		public static bool SetGOActive(this GameObject obj, bool active) {
 			if (obj.activeInHierarchy == active) return false;
 			obj.SetActive(active);

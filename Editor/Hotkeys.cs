@@ -49,7 +49,8 @@ public class Hotkeys : Editor {
 		Debug.Log("Applied to " + Selection.gameObjects.Length + " game object prefabs");
 	}
 
-	[MenuItem("ZKTools/Focus Camera %t")]
+
+//	[MenuItem("ZKTools/Focus Camera %t")]
 	static void FocusCamera() {
     	GameObject target = Selection.activeObject as GameObject;
         Quaternion rotation = SceneView.lastActiveSceneView.rotation;
