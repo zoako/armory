@@ -11,7 +11,10 @@ namespace ZKTools {
 		public static string Timerify (float timer) {
 			int displayMinutes = (int)(timer/60);
 			int displaySeconds = (int)(timer)%60;
-			string text = timer<0?"--:--":string.Format ("{0:00}:{1:00}", displayMinutes, displaySeconds);
+			int displayMills = (int)((timer-displaySeconds)*100);
+			string text = timer<0?"--:--":
+						displayMinutes>0?string.Format ("{0:00}:{1:00}", displayMinutes, displaySeconds):
+										 string.Format ("0:{0:00}.{1:00}", displaySeconds, displayMills);
 			return text;
 		}
 		
