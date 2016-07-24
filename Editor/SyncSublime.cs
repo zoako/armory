@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -127,3 +128,4 @@ public class SyncSublimeText2 : Editor
         sw.Close();
     }
 }
+#endif
