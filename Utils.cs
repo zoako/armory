@@ -13,7 +13,7 @@ namespace ZKTools {
 			int displaySeconds = (int)(timer)%60;
 			int displayMills = (int)((timer-displaySeconds)*100);
 			string text = timer<0?"--:--":
-						displayMinutes>0?string.Format ("{0:00}:{1:00}", displayMinutes, displaySeconds):
+						displayMinutes>0?string.Format ("{0:00}:{1:00}.{1:00}", displayMinutes, displaySeconds, displayMills):
 										 string.Format ("0:{0:00}.{1:00}", displaySeconds, displayMills);
 			return text;
 		}
