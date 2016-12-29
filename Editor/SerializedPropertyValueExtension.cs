@@ -129,7 +129,7 @@ public static class SerializedPropertyValueExtension
 		throw new NotImplementedException("Unimplemented propertyType "+thisSP.propertyType+".");
 	}
 	
-	public static dynamic Value(this SerializedProperty thisSP)
+	public static object Value(this SerializedProperty thisSP)
 	{
 		switch (thisSP.propertyType) {
 		case SerializedPropertyType.Integer:
